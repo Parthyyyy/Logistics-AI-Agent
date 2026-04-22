@@ -1,0 +1,17 @@
+# GenAI & RAG Core
+langchain
+langchain-chroma
+langchain-huggingface
+langchain-groq
+pypdf
+sentence-transformers
+chromadb
+
+# Agentic AI
+langgraph
+duckduckgo-search
+
+# App & DevOps Tools
+streamlit
+python-dotenv
+pytest
