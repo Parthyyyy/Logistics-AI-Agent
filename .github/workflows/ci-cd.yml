@@ -25,6 +25,8 @@ jobs:
         pip install -r requirements.txt
         
     - name: Run Automated Tests (PyTest)
+      env:
+        GROQ_API_KEY: "dummy_api_key_for_testing_only"
       run: |
         PYTHONPATH=. pytest tests/
 
