@@ -11,11 +11,11 @@ def logistics_document_search(query: str) -> str:
     if not db:
         return "Error: Database not initialized or no documents available. Please upload documents first."
     
-    # Perform similarity search
+    # Performing similarity search
     results = db.similarity_search(query, k=3)
     if not results:
         return "No relevant information found in internal logistics documents."
     
-    # Combine the retrieved chunks into a single text block
+    # Combining the retrieved chunks into a single text block
     context = "\n\n---\n\n".join([doc.page_content for doc in results])
     return context

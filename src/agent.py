@@ -5,7 +5,6 @@ from langchain_core.tools import tool
 from langgraph.prebuilt import create_react_agent
 from duckduckgo_search import DDGS
 
-# Import our internal RAG tool
 from src.rag_tool import logistics_document_search
 
 load_dotenv()
@@ -24,13 +23,12 @@ def live_web_search(query: str) -> str:
     except Exception as e:
         return f"Web search failed: {str(e)}"
 
-# 1. Initialize the LLM
+# Initializing LLM
 llm = ChatGroq(model="llama-3.3-70b-versatile", temperature=0)
 
-# 2. Combine tools into a list
+# Combining tools
 tools = [logistics_document_search, live_web_search]
 
-# 3. Define the System Prompt
 system_prompt = """You are an Advanced Enterprise Logistics AI Agent.
 Your goal is to answer user queries regarding logistics, supply chains, and company policies.
 
@@ -42,20 +40,17 @@ If you need both internal and external data, use both tools!
 Always synthesize the tool outputs into a clear, professional, and factual final answer. Do not guess information.
 """
 
-# 4. Create the Agent using LangGraph (VERSION PROOF METHOD)
 logistics_agent = create_react_agent(llm, tools)
 
 def run_agent(user_query: str):
     """Helper function to run the agent and extract the final response."""
     print(f"\n🤖 Agent is evaluating query: '{user_query}'...")
     
-    # We pass the system prompt dynamically here! This is immune to LangGraph updates.
     inputs = {"messages":[
         ("system", system_prompt),
         ("user", user_query)
     ]}
     
-    # Run the agent node by node
     final_response = ""
     for chunk in logistics_agent.stream(inputs, stream_mode="values"):
         message = chunk["messages"][-1]
@@ -68,7 +63,7 @@ def run_agent(user_query: str):
         
     return final_response
 
-# Test the Agent directly
+# Testing the agent
 if __name__ == "__main__":
     print("\n--- TEST 1: Internal Knowledge ---")
     print(run_agent("What are the standard guidelines mentioned in our logistics documents?"))

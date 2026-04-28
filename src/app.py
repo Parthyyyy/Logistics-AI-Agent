@@ -7,7 +7,6 @@ st.set_page_config(page_title="Agentic Logistics Platform", page_icon="🚢", la
 st.title("🚢 Enterprise Agentic AI Platform")
 st.markdown("Ask logistics questions. The Agent will decide whether to search internal PDFs or browse the live web!")
 
-# Sidebar for Document Management
 with st.sidebar:
     st.header("⚙️ Admin & Data Management")
     uploaded_files = st.file_uploader("Upload Logistics PDFs", type=["pdf"], accept_multiple_files=True)

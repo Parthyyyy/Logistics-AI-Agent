@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  # Phase 1: Continuous Integration (Testing)
+  # Phase 1: Continuous Integration 
   test-python-code:
     runs-on: ubuntu-latest
     steps:
@@ -30,7 +30,7 @@ jobs:
       run: |
         PYTHONPATH=. pytest tests/
 
-  # Phase 2: Continuous Delivery (Docker Build Validation)
+  # Phase 2: Continuous Delivery 
   build-docker-image:
     needs: test-python-code 
     runs-on: ubuntu-latest
